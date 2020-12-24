@@ -18,9 +18,7 @@ public class RegistrationController {
 
 	@PostMapping("/registration")
 	public User registration(@RequestBody User payload) throws JSONException{
-		
-//		JSONObject userInfo = new JSONObject(payload);
-		
+			
 		User user = accountService.regis(payload);
 		
 		return user;
