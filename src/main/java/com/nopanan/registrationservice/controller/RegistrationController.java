@@ -1,5 +1,10 @@
 package com.nopanan.registrationservice.controller;
 
+import java.sql.Date;
+import java.text.SimpleDateFormat;
+import java.time.*;
+import java.util.Calendar;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.configurationprocessor.json.JSONException;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -20,6 +25,8 @@ public class RegistrationController {
 	public User registration(@RequestBody User payload) throws JSONException{
 			
 		User user = accountService.regis(payload);
+		user.setPrivilage(accountService.salaryCal(payload));
+		user.setRefcode(accountService.refCodeCal(user));
 		
 		return user;
 	}

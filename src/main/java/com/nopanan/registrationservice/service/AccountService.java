@@ -1,5 +1,9 @@
 package com.nopanan.registrationservice.service;
 
+//import java.sql.Date;
+import java.text.SimpleDateFormat;
+import java.util.*;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -28,8 +32,22 @@ public class AccountService {
 		
 	}
 	
-	public User regis(User user) {
-		
+	public String refCodeCal(User user)
+	{
+		Date date = new Date(); 
+	    SimpleDateFormat formatter = new SimpleDateFormat("yyyyMMdd");  
+	    String strDate = formatter.format(date);  
+	    System.out.println("Date Format with yyyy/MM/dd : "+strDate);  
+	    
+	    String numberSS = user.getPhone().substring(user.getPhone().length() - 4);    
+	    String refCode = strDate+numberSS;
+	    
+	    System.out.println("substr phone " + refCode);  		    
+		return refCode;
+	}
+	
+	
+	public User regis(User user) {			
 		userRepo.saveAndFlush(mappingUser(user));
 		
 		return user;
@@ -42,6 +60,7 @@ public class AccountService {
 		tb.setAddress(user.getAddress());
 		tb.setPhone(user.getPhone());
 		tb.setSalary(user.getSalary());
+		tb.setRefcode(refCodeCal(user));
 
 		return tb;
 	}
