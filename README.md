@@ -10,6 +10,8 @@
 - Open Postman > [POST] http://localhost:8080/registration
 - add parameter to JSON raw body
 
+[json data for testing]
+
 {
     "username" : "AccountExam_Test",
     "password" : "testpassword",
